@@ -1,5 +1,5 @@
 from inspections.product import ProductInspection
-from inspections.validators import PurchaseValidator as Validator
+from inspections.validators import ProductValidator as Validator
 
 
 def test_product_prices(products_by_chunk):
