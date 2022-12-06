@@ -1,9 +1,9 @@
 import re
 from collections import Counter
-from decimal import Decimal
 
 from enums.errors import PurchaseError
 from models.purchase import Purchase
+from utils.helpers import get_precision
 
 
 class PurchaseInspection:
@@ -68,18 +68,18 @@ class PurchaseInspection:
     def taxful_total_price_sum(purchase: Purchase):
         if purchase.taxful_total_price <= 0:
             return PurchaseError.NEGATIVE_TAXFUL_TOTAL
-        expected_total_price = sum([Decimal.from_float(product.taxful_price) for product in purchase.products])
-        actual_total_price = Decimal.from_float(purchase.taxful_total_price)
-        if expected_total_price != actual_total_price:
+        precision = get_precision(purchase.taxful_total_price)
+        expected_total_price = round(sum([product.taxful_price for product in purchase.products]), precision)
+        if purchase.taxful_total_price != expected_total_price:
             return PurchaseError.INVALID_TAXFUL_TOTAL
 
     @staticmethod
     def taxles_total_price_sum(purchase: Purchase):
         if purchase.taxless_total_price <= 0:
             return PurchaseError.NEGATIVE_TAXLES_TOTAL
-        expected_total_price = sum([Decimal.from_float(product.taxless_price) for product in purchase.products])
-        actual_total_price = Decimal.from_float(purchase.taxless_total_price)
-        if expected_total_price != actual_total_price:
+        precision = get_precision(purchase.taxless_total_price)
+        expected_total_price = round(sum([product.taxless_price for product in purchase.products]), precision)
+        if purchase.taxless_total_price != expected_total_price:
             return PurchaseError.INVALID_TAXLES_TOTAL
 
     @staticmethod
