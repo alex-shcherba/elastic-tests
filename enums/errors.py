@@ -36,3 +36,15 @@ class PurchaseError(Enum):
 
 class ProductError(Enum):
     NO_ERROR = 'No error'
+    INVALID_BASE_PRICE = 'Invalid base price'
+    INVALID_DISCOUNT_PERCENT = 'Invalid discount percent'
+    INVALID_QUANTITY = 'Invalid quantity'
+    EMPTY_MANUFACTURER = 'Empty manufacturer'
+    INVALID_TAX_AMOUNT = 'Invalid tax amount'
+    EMPTY_CATEGORY = 'Empty category'
+    EMPTY_SKU = 'Empty sku'
+    INVALID_SKU = 'Invalid sku'
+    INVALID_TAXLESS_PRICE = 'Invalid taxles price'
+    INVALID_MIN_PRICE = 'Invalid min price'
+    INVALID_UNIT_DISCOUNT_AMOUNT = 'Invalid unit discount amount'
+    INVALID_DISCOUNT_AMOUNT = 'Invalid discount amount'
