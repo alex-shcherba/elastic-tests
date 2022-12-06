@@ -1,7 +1,7 @@
 from enums.errors import PurchaseError, ProductError
 
 
-class Validator:
+class BaseValidator:
 
     def __init__(self, items: list, error_enum):
         self._items = items
@@ -12,6 +12,7 @@ class Validator:
         self._exec_func.append(func)
 
     def check_all(self):
+        print(f"{len(self._exec_func)} checks will be applied to a set of {len(self._items)} items")
         for item in self._items:
             for check_func in self._exec_func:
                 error = check_func(item)
@@ -23,12 +24,12 @@ class Validator:
             raise AssertionError(f"Errors with purchase data: ({err_msg})")
 
 
-class PurchaseValidator(Validator):
+class PurchaseValidator(BaseValidator):
 
     def __init__(self, items: list):
         super().__init__(items, PurchaseError)
 
 
-class ProductValidator(Validator):
+class ProductValidator(BaseValidator):
     def __init__(self, items: list):
         super().__init__(items, ProductError)
