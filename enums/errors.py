@@ -50,3 +50,5 @@ class ProductError(Enum):
     INVALID_MIN_PRICE = 'Invalid min price'
     INVALID_UNIT_DISCOUNT_AMOUNT = 'Invalid unit discount amount'
     INVALID_DISCOUNT_AMOUNT = 'Invalid discount amount'
+    INVALID_PRICE = 'Invalid price'
+    INCORRECT_PRICE_CALCULATION = 'Incorrect price calculation'
