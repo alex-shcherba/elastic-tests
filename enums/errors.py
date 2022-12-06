@@ -24,6 +24,7 @@ class PurchaseError(Enum):
     INVALID_TAXLES_TOTAL = 'Invalid tax les value'
     NEGATIVE_QUANTITY_TOTAL = 'Negative value of total quantity'
     INVALID_QUANTITY_TOTAL = 'Invalid total quantity value'
+    UNIQUE_PRODUCTS = 'Unique products'
     NEGATIVE_UNIQ_TOTAL = 'Negative value of unique quantity'
     INVALID_UNIQ_TOTAL = 'Invalid unique quantity value'
     INVALID_MANUFACTURED = 'Invalid manufactured collection'

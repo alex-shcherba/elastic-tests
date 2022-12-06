@@ -97,6 +97,12 @@ class PurchaseInspection:
             return PurchaseError.INVALID_QUANTITY_TOTAL
 
     @staticmethod
+    def uniq_products(purchase: Purchase):
+        unique_products = set([product.product_id for product in purchase.products])
+        if purchase.total_unique_products != len(unique_products):
+            return PurchaseError.UNIQUE_PRODUCTS
+
+    @staticmethod
     def manufacturer_is_collected(purchase: Purchase):
         if not purchase.manufacturer:
             return PurchaseError.EMPTY_MANUFACTURED

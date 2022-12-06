@@ -68,10 +68,11 @@ def test_total_quantity_products(purchases):
     validator.check_all()
 
 
-def test_unique_quantity_products(purchases):
+def test_unique_products(purchases):
     """Unique quantity products is equal to number of products"""
     validator = Validator(purchases)
     validator.check(PurchaseInspection.uniq_quantity_products)
+    validator.check(PurchaseInspection.uniq_products)
     validator.check_all()
 
 
