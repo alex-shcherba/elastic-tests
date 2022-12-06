@@ -1,5 +1,6 @@
 from enums.errors import ProductError
 from models.product import Product
+from utils.helpers import get_precision
 
 
 class ProductInspection:
@@ -15,11 +16,6 @@ class ProductInspection:
             return ProductError.INVALID_BASE_UNIT_PRICE
 
     @staticmethod
-    def discount_percent_is_allowed(product: Product):
-        if 0 < product.discount_percentage > 100:
-            return ProductError.INVALID_DISCOUNT_PERCENT
-
-    @staticmethod
     def quantity_is_allowed(product: Product):
         if product.quantity <= 0:
             return ProductError.INVALID_QUANTITY
@@ -31,7 +27,7 @@ class ProductInspection:
 
     @staticmethod
     def tax_amount_is_allowed(product: Product):
-        if product.tax_amount <= 0:
+        if product.tax_amount < 0:
             return ProductError.INVALID_TAX_AMOUNT
 
     @staticmethod
@@ -67,8 +63,22 @@ class ProductInspection:
             return ProductError.INVALID_UNIT_DISCOUNT_AMOUNT
 
     @staticmethod
+    def discount_percent_is_allowed(product: Product):
+        if 0 < product.discount_percentage > 100:
+            return ProductError.INVALID_DISCOUNT_PERCENT
+
+    @staticmethod
     def discount_amount_is_allowed(product: Product):
         if product.discount_amount < 0:
             return ProductError.INVALID_DISCOUNT_AMOUNT
-        elif product.discount_amount != product.price * product.discount_percentage * product.quantity:
+        elif product.discount_amount != product.quantity * product.unit_discount_amount:
             return ProductError.INVALID_DISCOUNT_AMOUNT
+
+    @staticmethod
+    def price_calculation(product: Product):
+        if product.price <= 0:
+            return ProductError.INVALID_PRICE
+        precision = get_precision(product.price)
+        expected_price = round(product.base_price - product.quantity * product.unit_discount_amount, precision)
+        if product.price != expected_price:
+            return ProductError.INCORRECT_PRICE_CALCULATION
