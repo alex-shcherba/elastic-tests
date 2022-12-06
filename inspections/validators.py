@@ -2,12 +2,11 @@ from enums.errors import PurchaseError, ProductError
 
 
 class Validator:
-    __error_enum = None
 
-    def __init__(self, items: list):
+    def __init__(self, items: list, error_enum):
         self._items = items
         self._exec_func = []
-        self._errors = {e: [] for e in self.__error_enum}
+        self._errors = {e: [] for e in error_enum}
 
     def check(self, func):
         self._exec_func.append(func)
@@ -25,8 +24,11 @@ class Validator:
 
 
 class PurchaseValidator(Validator):
-    __error_enum = PurchaseError
+
+    def __init__(self, items: list):
+        super().__init__(items, PurchaseError)
 
 
 class ProductValidator(Validator):
-    __error_enum = ProductError
+    def __init__(self, items: list):
+        super().__init__(items, ProductError)
