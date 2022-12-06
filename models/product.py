@@ -9,15 +9,15 @@ class Product(BaseModel):
     discount_percentage: int
     quantity: int
     manufacturer: str
-    tax_amount: int
+    tax_amount: float
     product_id: int
     category: str
     sku: str
     taxless_price: float
-    unit_discount_amount: int
+    unit_discount_amount: float
     min_price: float
     id: str
-    discount_amount: int
+    discount_amount: float
     created_on: datetime
     product_name: str
     price: float
