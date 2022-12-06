@@ -17,3 +17,8 @@ def make_date_chunks(iterable, group_number):
         res.append(start + diff * i)
     res.append(end)
     return res
+
+
+def get_precision(number: float):
+    """Find count of number after comma (dirty way)"""
+    return len(str(number).split('.')[-1])
