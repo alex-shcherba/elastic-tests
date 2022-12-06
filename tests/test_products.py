@@ -10,6 +10,7 @@ def test_product_prices(products_by_chunk):
     validator.check(ProductInspection.base_unit_price_is_allowed)
     validator.check(ProductInspection.taxless_price_is_allowed)
     validator.check(ProductInspection.taxful_price_is_allowed)
+    validator.check(ProductInspection.price_calculation)
     validator.check_all()
 
 
